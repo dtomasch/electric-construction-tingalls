@@ -1,0 +1,89 @@
+//breakpoints
+
+@mixin for-phone-only {
+	@media (max-width: 599px) {
+		@content;
+	}
+}
+@mixin for-tablet-portrait-up {
+	@media (min-width: 600px) {
+		@content;
+	}
+}
+@mixin for-tablet-portrait-down {
+	@media (max-width: 599px) {
+		@content;
+	}
+}
+@mixin for-tablet-landscape-up {
+	@media (min-width: 800px) {
+		@content;
+	}
+}
+@mixin for-tablet-landscape-down {
+	@media (max-width: 799px) {
+		@content;
+	}
+}
+@mixin for-desktop-up {
+	@media (min-width: 1024px) {
+		@content;
+	}
+}
+@mixin for-desktop-down {
+	@media (max-width: 1023px) {
+		@content;
+	}
+}
+@mixin for-big-desktop-up {
+	@media (min-width: 1500px) {
+		@content;
+	}
+}
+
+
+
+//--------------------------------------------------------------
+// Widths
+//--------------------------------------------------------------
+
+$width-slim: 70rem;
+$width-slim-max: 80%;
+$width-medium: 75rem;
+$width-medium-max: 85%;
+$width-wide: 80rem;
+$width-wide-max: 90%;
+$width-full: 90%;
+$width-full-max: 95%;
+$width-100: 100%;
+
+
+// width-slim
+@mixin width-slim {
+	max-width: $width-slim-max;
+	width: $width-slim;
+}
+
+// width-medium
+@mixin width-slim {
+	max-width: $width-medium-max;
+	width: $width-medium;
+}
+
+// width-wide
+@mixin width-wide {
+	max-width: $width-wide-max;
+	width: $width-wide;
+}
+
+// width-full
+@mixin width-full {
+	max-width: $width-full-max;
+	width: auto;
+}
+
+// width 100%
+@mixin width-100 {
+	max-width: $width-100;
+	width: calc(100% - 2rem );
+}

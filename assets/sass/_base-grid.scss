@@ -1,0 +1,362 @@
+@use 'base-breakpoints' as *;
+@use 'site-variables' as *;
+// —————————————————————————————————————————————————————————————————————————————
+// —————————————————————————————————————————————————————————————————————————————
+//
+//
+// *** Grid ***
+//
+//
+// —————————————————————————————————————————————————————————————————————————————
+// —————————————————————————————————————————————————————————————————————————————
+
+
+
+section {
+	margin-bottom: $gutter-vertical;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+
+
+
+
+// TODO: it's possible we can simplify this
+.container.width-slim .featured-header-text,
+.container.width-slim > section > .row,
+.container.width-wide > section.width-slim > .row,
+.container.width-full > section.width-slim > .row,
+.container > section.width-slim > .row {
+	@include for-tablet-landscape-up {
+		@include width-slim;
+	}
+}
+
+.container.width-wide .featured-header-text,
+.container.width-wide > section > .row,
+.container.width-slim > section.width-wide > .row,
+.container.width-full > section.width-wide > .row,
+.container > section.width-wide > .row {
+	@include for-tablet-landscape-up {
+		@include width-wide;
+	}
+}
+
+.container.width-full .featured-header-text,
+.container.width-full > section > .row,
+.container.width-slim > section.width-full > .row,
+.container.width-wide > section.width-full > .row,
+.container > section.width-full > .row {
+	@include for-tablet-landscape-up {
+		@include width-full;
+	}
+}
+
+.container.width-100 .featured-header-text,
+.container.width-100 > section > .row,
+.container.width-slim > section.width-100 > .row,
+.container.width-wide > section.width-100 > .row,
+.container > section.width-100 > .row {
+	@include for-tablet-landscape-up {
+		@include width-100;
+	}
+}
+
+@include for-tablet-landscape-down {
+	section > .row {
+		margin-left: $gutter-horizontal;
+		margin-right: $gutter-horizontal;
+	}
+}
+
+.row {
+	box-sizing: border-box;
+	display: flex;
+	flex: 0 1 auto;
+	flex-direction: row;
+	flex-wrap: wrap;
+	@include for-tablet-landscape-up {
+		margin: 0 auto $gutter-vertical auto;
+		&:last-of-type:not(:only-of-type) {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.has-background-color {
+	margin-bottom: 0;
+	padding-top: $gutter-vertical * 2;
+}
+
+.has-background-color + .has-background-color {
+	padding-top: 0;
+}
+
+.has-background-color + :not(.has-background-color) {
+	margin-top: $gutter-vertical;
+}
+
+
+
+img.size-full {
+	width: 100%;
+}
+
+
+
+
+[class*='col-'],
+.col {
+	box-sizing: border-box;
+	margin-bottom: $gutter-vertical;
+	padding-left: $gutter-horizontal;
+	padding-right: $gutter-horizontal;
+}
+
+[class*='col-']:only-of-type,
+.col:only-of-type {
+	margin-bottom: 0;
+}
+
+
+
+
+
+
+// The default behavior should be 100% on small, and then the columns are availble on tablet up
+@include for-tablet-portrait-up {
+	@for $i from 1 through 12 {
+		.col-#{$i} {
+			max-width: (100% / 12) * $i;
+
+			-webkit-flex-basis: (100% / 12) * $i;
+			        flex-basis: (100% / 12) * $i;
+			-ms-flex-preferred-size: (100% / 12) * $i;
+		}
+	}
+
+	.col-25 {
+		max-width: (100% / 4);
+
+		-webkit-flex-basis: (100% / 4);
+		        flex-basis: (100% / 4);
+		-ms-flex-preferred-size: (100% / 4);
+	}
+	.col-50 {
+		max-width: (100% / 4) * 2;
+
+		-webkit-flex-basis: ((100% / 4) * 2);
+		        flex-basis: ((100% / 4) * 2);
+		-ms-flex-preferred-size: ((100% / 4) * 2);
+	}
+
+	.col-75 {
+		max-width: (100% / 4) * 3;
+
+		-webkit-flex-basis: ((100% / 4) * 3);
+		        flex-basis: ((100% / 4) * 3);
+		-ms-flex-preferred-size: ((100% / 4) * 3);
+	}
+
+	.col-100 {
+		width: 100%;
+	}
+
+	.col-33 {
+		max-width: (100% / 3);
+
+		-webkit-flex-basis: (100% / 3);
+		        flex-basis: (100% / 3);
+		-ms-flex-preferred-size: (100% / 3);
+	}
+
+	.col-66 {
+		max-width: (100% / 3) * 2;
+
+		-webkit-flex-basis: ((100% / 3) * 2);
+		        flex-basis: ((100% / 3) * 2);
+		-ms-flex-preferred-size: ((100% / 3) * 2);
+	}
+}
+
+
+@include for-tablet-portrait-down {
+	[class*='col-'] {
+		// margin-bottom: $paragraph-margin;
+		// padding: 0;
+		width: 100%;
+	}
+	//
+	[class*='col-sm-'] {
+		box-sizing: border-box;
+	}
+
+
+	// Next, if we DO want things have columns on small, we set them up here
+	@for $i from 1 through 12 {
+		.col-sm-#{$i} {
+			max-width: (100% / 12) * $i;
+
+			-webkit-flex-basis: (100% / 12) * $i;
+			        flex-basis: (100% / 12) * $i;
+			-ms-flex-preferred-size: (100% / 12) * $i;
+		}
+	}
+
+	.col-sm-25 {
+		max-width: (100% / 4);
+
+		-webkit-flex-basis: (100% / 4);
+		        flex-basis: (100% / 4);
+		-ms-flex-preferred-size: (100% / 4);
+	}
+	.col-sm-50 {
+		max-width: (100% / 4) * 2;
+
+		-webkit-flex-basis: ((100% / 4) * 2);
+		        flex-basis: ((100% / 4) * 2);
+		-ms-flex-preferred-size: ((100% / 4) * 2);
+	}
+
+	.col-sm-75 {
+		max-width: (100% / 4) * 3;
+
+		-webkit-flex-basis: ((100% / 4) * 3);
+		        flex-basis: ((100% / 4) * 3);
+		-ms-flex-preferred-size: ((100% / 4) * 3);
+	}
+
+	.col-sm-100 {
+		width: 100%;
+	}
+
+	.col-sm-33 {
+		max-width: (100% / 3);
+
+		-webkit-flex-basis: (100% / 3);
+		        flex-basis: (100% / 3);
+		-ms-flex-preferred-size: (100% / 3);
+	}
+
+	.col-sm-66 {
+		max-width: (100% / 3) * 2;
+
+		-webkit-flex-basis: ((100% / 3) * 2);
+		        flex-basis: ((100% / 3) * 2);
+		-ms-flex-preferred-size: ((100% / 3) * 2);
+	}
+}
+
+@include for-tablet-portrait-up {
+	// Next, if we DO want things have columns on small, we set them up here
+	@for $i from 1 through 12 {
+		.col-md-#{$i} {
+			max-width: (100% / 12) * $i;
+
+			-webkit-flex-basis: (100% / 12) * $i;
+			        flex-basis: (100% / 12) * $i;
+			-ms-flex-preferred-size: (100% / 12) * $i;
+		}
+	}
+
+	.col-md-25 {
+		max-width: (100% / 4);
+
+		-webkit-flex-basis: (100% / 4);
+		        flex-basis: (100% / 4);
+		-ms-flex-preferred-size: (100% / 4);
+	}
+	.col-md-50 {
+		max-width: (100% / 4) * 2;
+
+		-webkit-flex-basis: ((100% / 4) * 2);
+		        flex-basis: ((100% / 4) * 2);
+		-ms-flex-preferred-size: ((100% / 4) * 2);
+	}
+
+	.col-md-75 {
+		max-width: (100% / 4) * 3;
+
+		-webkit-flex-basis: ((100% / 4) * 3);
+		        flex-basis: ((100% / 4) * 3);
+		-ms-flex-preferred-size: ((100% / 4) * 3);
+	}
+
+	.col-md-100 {
+		width: 100%;
+	}
+
+	.col-md-33 {
+		max-width: (100% / 3);
+
+		-webkit-flex-basis: (100% / 3);
+		        flex-basis: (100% / 3);
+		-ms-flex-preferred-size: (100% / 3);
+	}
+
+	.col-md-66 {
+		max-width: (100% / 3) * 2;
+
+		-webkit-flex-basis: ((100% / 3) * 2);
+		        flex-basis: ((100% / 3) * 2);
+		-ms-flex-preferred-size: ((100% / 3) * 2);
+	}
+}
+
+
+@include for-desktop-up {
+	// Next, if we DO want things have columns on small, we set them up here
+	@for $i from 1 through 12 {
+		.col-lg-#{$i} {
+			max-width: (100% / 12) * $i;
+
+			-webkit-flex-basis: (100% / 12) * $i;
+			        flex-basis: (100% / 12) * $i;
+			-ms-flex-preferred-size: (100% / 12) * $i;
+		}
+	}
+
+	.col-lg-25 {
+		max-width: (100% / 4);
+
+		-webkit-flex-basis: (100% / 4);
+		        flex-basis: (100% / 4);
+		-ms-flex-preferred-size: (100% / 4);
+	}
+	.col-lg-50 {
+		max-width: (100% / 4) * 2;
+
+		-webkit-flex-basis: ((100% / 4) * 2);
+		        flex-basis: ((100% / 4) * 2);
+		-ms-flex-preferred-size: ((100% / 4) * 2);
+	}
+
+	.col-lg-75 {
+		max-width: (100% / 4) * 3;
+
+		-webkit-flex-basis: ((100% / 4) * 3);
+		        flex-basis: ((100% / 4) * 3);
+		-ms-flex-preferred-size: ((100% / 4) * 3);
+	}
+
+	.col-lg-100 {
+		width: 100%;
+	}
+
+	.col-lg-33 {
+		max-width: (100% / 3);
+
+		-webkit-flex-basis: (100% / 3);
+		        flex-basis: (100% / 3);
+		-ms-flex-preferred-size: (100% / 3);
+	}
+
+	.col-lg-66 {
+		max-width: (100% / 3) * 2;
+
+		-webkit-flex-basis: ((100% / 3) * 2);
+		        flex-basis: ((100% / 3) * 2);
+		-ms-flex-preferred-size: ((100% / 3) * 2);
+	}
+}

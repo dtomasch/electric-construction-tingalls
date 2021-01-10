@@ -1,0 +1,446 @@
+@use 'site-variables' as *;
+@use 'base-breakpoints' as *;
+
+
+
+
+
+//--------------------------------------------------------------
+// Type
+//--------------------------------------------------------------
+
+// Make type normal across browsers
+*,
+html,
+body {
+	font-family: $body-font;
+	font-size: 15px;
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+	    -ms-text-size-adjust: 100%;
+}
+
+
+
+// Headers
+h1,
+h2,
+h3,
+h4,
+h5, {
+	font-family: $header-font;
+	font-weight: $font-weight-bold;
+	line-height: $header-line-height;
+}
+
+
+$headers: //
+	'h1' 1 			$h2-color,
+  'h2' 1.25 	$h2-color,
+  'h3' 1.65 	$h3-color,
+  'h4' 1.85		$h4-color,
+  'h5' 2.25		$h5-color;
+
+
+
+// Iterates $headers above to create h1, h2, h3, etc
+@each $size, $modifier, $color in $headers {
+	#{$size} {
+		color: $color;
+		font-size: $header-size / $modifier;
+		margin-bottom: $header-margin;
+	}
+
+
+
+	p + #{$size},
+	ul + #{$size} {
+		padding-top: $header-margin * 2;
+	}
+}
+
+
+h6 {
+	font-size: 1rem;
+	font-weight: $font-weight-bold;
+	line-height: $paragraph-line-height;
+	margin-bottom: $paragraph-margin;
+}
+
+p + h6,
+ul + h6 {
+	padding-top: $header-margin;
+}
+
+// .featured-headers are a bit different
+
+.featured-header {
+	@each $size, $modifier in $headers {
+		#{$size} {
+			font-size: ($header-size * $modifier-up);
+			margin-bottom: $header-margin * 2;
+		}
+	}
+
+	h6 {
+		font-size: 1rem * $modifier-up;
+	}
+
+	p {
+		font-size: $larger-font-size;
+		font-weight: $font-weight-medium;
+		// margin: 0 auto;
+		// max-width: 75%;
+	}
+	*:last-child {
+		margin-bottom: 0;
+	}
+}
+
+
+
+@include for-tablet-landscape-down {
+	.featured-header h1,
+	h1 {
+		font-size: $header-size;
+		margin-bottom: 0;
+	}
+
+	.featured-header h2,
+	.featured-header h3,
+	.featured-header h4,
+	.featured-header h5,
+	h2,
+	h3,
+	h5,
+	h4, {
+		font-size: $header-size / 1.5;
+		margin-bottom: $header-margin / 2;
+	}
+
+
+
+	.featured-header h6,
+	h6 {
+		font-size: 1rem;
+		line-height: $header-margin;
+		margin-bottom: $header-margin / 2;
+	}
+}
+
+
+
+//--------------------------------------------------------------
+// Ps next to hs
+// "I'll put my p next to your h"
+// "What?"
+//--------------------------------------------------------------
+
+
+//--------------------------------------------------------------
+// Paragraphs
+//--------------------------------------------------------------
+p {
+	color: $paragraph-color;
+	font-size: $paragraph-size;
+	font-weight: $font-weight;
+	line-height: $paragraph-line-height;
+	margin-bottom: $paragraph-margin;
+}
+
+p:last-of-type {
+	margin-bottom: 0;
+}
+
+
+
+section.has-intro [class*='col-'] p:first-of-type,
+.row.has-intro [class*='col-'] p:first-of-type,
+p.intro {
+	color: $header-color;
+	font-size: $larger-font-size;
+	font-weight: $font-weight-medium;
+}
+
+
+@include for-tablet-landscape-up {
+	.section-header {
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			margin-bottom: 0;
+		}
+	}
+}
+
+
+
+//--------------------------------------------------------------
+// Links
+//--------------------------------------------------------------
+.use-plain-links a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a {
+	color: $link-color;
+	text-decoration: none;
+	transition: all 0.2s ease;
+
+
+	&:hover {
+		color: darken($link-color, 20%);
+	}
+}
+
+// a.external[target='_blank']::after {
+// 	content: url('data:image/svg+xml;utf8,<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.95 9.95"><path d="M6.84,0,8,1.15l-.31.31L5.15,4l-.43.44.88.88.45-.43L8.53,2.35,8.84,2,10,3.15V0ZM0,1.28V10H8.71V5H7.47V8.75H1.24V2.53H5V1.28Z" transform="translate(0 -0.04)" fill="#878787"/></svg>');
+// 	display: inline-block;
+// 	height: 5px;
+// 	margin: -10px 3px 0 5px;
+// 	position: relative;
+// 	top: -2px;
+// 	width: 10px;
+// }
+
+
+//--------------------------------------------------------------
+// Lists
+//--------------------------------------------------------------
+p + ul {
+	// margin-top: 0;
+}
+
+ul,
+ol {
+	margin: $paragraph-margin 0 $paragraph-margin $paragraph-margin * 2;
+
+	li {
+		color: $paragraph-color;
+		line-height: $paragraph-line-height;
+		margin-bottom: $paragraph-margin;
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	ul,
+	ol {
+		margin-bottom: $paragraph-margin;
+	}
+}
+
+ul {
+	li {
+		list-style: disc;
+	}
+
+	ul {
+		li {
+			list-style: circle;
+		}
+	}
+}
+
+ol {
+	li {
+		list-style: decimal;
+	}
+}
+
+
+
+
+
+// Blockquote
+blockquote {
+	color: $blockquote-color;
+	font-size: $blockquote-size;
+	font-style: italic;
+	line-height: $blockquote-line-height;
+	margin: $blockquote-margin 0;
+	text-align: center;
+}
+
+
+// Tables
+table {
+	border-collapse: collapse;
+	margin: $blockquote-margin 0;
+	width: 100%;
+}
+
+table,
+td,
+th {
+	border: 1px solid $border-color;
+	text-align: left;
+}
+
+th {
+	font-weight: $font-weight-bold;
+}
+
+th,
+td {
+	padding: 1rem;
+}
+
+
+// Figure
+figure {
+	margin: $blockquote-margin 0;
+
+	img {
+		margin: 0;
+	}
+}
+
+figcaption {
+	color: lighten($paragraph-color, 10%);
+	font-size: $paragraph-margin * 0.8;
+	margin-top: 1rem * $modifier-down;
+}
+
+
+// Code
+pre {
+	background-color: lighten($border-color, 12%);
+	border: 1px solid $border-color;
+	display: block;
+	margin: 0 0 40px 0;
+	overflow: auto;
+	padding: 20px;
+	$border-radius: 3px;
+
+	code {
+		border: none;
+		line-height: 1.5em;
+		padding: 0;
+		position: static;
+	}
+}
+
+code {
+	border: 1px solid $border-color;
+	color: darken($border-color, 70%);
+	font-family: Courier New, Courier, monospace;
+	font-size: $paragraph-size / 1.2;
+	line-height: 1em;
+	padding: 3px;
+	pointer-events: none;
+	position: relative;
+	top: -0.2em;
+	$border-radius: 3px;
+}
+
+
+
+// Misc Styles
+em,
+i,
+.italic {
+	font-style: italic;
+}
+
+strong,
+.strong,
+b,
+.bold {
+	// color: $header-color;
+	font-weight: $font-weight-bold;
+}
+
+.all-caps {
+	text-transform: uppercase;
+}
+
+@include for-tablet-landscape-up {
+	.smaller p,
+	.smaller a,
+	.smaller li,
+	.smaller ul,
+	.smaller ol,
+	p.smaller,
+	a.smaller,
+	li.smaller,
+	ul.smaller,
+	ol.smaller, {
+		font-size: $smaller-font-size;
+		line-height: 1.4;
+	}
+}
+
+.larger * {
+	font-size: $larger-font-size;
+}
+
+
+
+//Type Utilities
+
+ul.flat,
+ol.flat {
+	margin: 0;
+	padding: 0;
+	li {
+		list-style: none;
+		margin: 0;
+		padding: 0 $paragraph-margin;
+	}
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+	li {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+nav {
+	@include for-tablet-landscape-up {
+		font-size: $smaller-font-size;
+	}
+}
+
+// @include for-tablet-landscape-up {
+// 	ul.flat,
+// 	ol.flat {
+// 		display: flex;
+//
+// 		li {
+// 			&:first-of-type {
+// 				padding-left: 0;
+// 			}
+// 			&:last-of-type {
+// 				padding-right: 0;
+// 			}
+// 		}
+// 	}
+// }
+
+
+
+// https://make.wordpress.org/accessibility/handbook/markup/the-css-class-screen-reader-text/
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important;
+
+	clip-path: inset(50%);
+}

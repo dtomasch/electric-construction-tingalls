@@ -1,0 +1,133 @@
+@use 'base-breakpoints' as *;
+@use 'site-variables' as *;
+
+
+
+.featured-header {
+	box-sizing: border-box;
+	height: 65vh;
+	min-height: 25rem;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	@include for-tablet-landscape-up {
+		border: 1rem solid white;
+	}
+}
+
+.home .featured-header {
+	height: 100vh;
+}
+
+.featured-header.featured-image {
+	background-blend-mode: multiply;
+	background-position: center 32%;
+	background-size: cover;
+}
+
+
+
+.featured-header        .vimeo-container {
+	height: 100vh;
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+	width: 100%;
+}
+.featured-header iframe {
+	box-sizing: border-box;
+	height: 56.25vw;
+	left: 50%;
+	min-height: 100%;
+	min-width: 100%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 177.77777778vh;
+}
+
+
+// https://stackoverflow.com/questions/46670150/low-power-mode-detection-in-javascript-for-ios11
+
+
+.featured-header .container {
+	position: relative;
+	z-index: 2;
+}
+
+.featured-header .overlay {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+}
+
+.featured-header-text {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	margin: auto;
+	padding: 0 5%;
+	position: relative;
+	text-align: center;
+	z-index: 999;
+
+	h1,
+	h2,
+	h2,
+	h4,
+	h5,
+	h6,
+	li,
+	a,
+	p {
+		color: white;
+	}
+}
+
+.post-header {
+	max-height: 65vh;
+	overflow: hidden;
+}
+
+
+// .see-all {
+// 	padding-top: 1rem;
+// 	a {
+// 		display: block;
+// 		font-weight: $font-weight-bold;
+// 		margin-top: 1rem;
+// 		padding-top: 1rem;
+// 		width: 1rem * 10;
+// 		@include border(top);
+// 	}
+// }
+
+
+
+#eu-cookie-bar {
+	padding: 12px 20px;
+}
+
+
+
+// —————————————————————————————————————————————————————————————————————————————
+// —————————————————————————————————————————————————————————————————————————————
+//
+//
+// *** sidebar ***
+//
+//
+// —————————————————————————————————————————————————————————————————————————————
+// —————————————————————————————————————————————————————————————————————————————
+
+.sidebar {
+	border-left: 1px solid $grey-5;
+}
+
+.sidebar ul.flat li {
+	padding: 0.5rem 0;
+}

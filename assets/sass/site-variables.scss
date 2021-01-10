@@ -1,0 +1,253 @@
+@use 'base-breakpoints' as *;
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Colors ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+// Colors
+$color-1: rgba(195, 42, 38, 1.000);
+$color-2: rgba(196, 37, 43, 1.000);
+$color-3: rgba(171, 44, 43, 1.000);
+$color-4: rgba(210, 85, 82, 1.000);
+
+
+// // Color names
+$red: $color-1;
+$red-2: $color-2;
+$red-3: $color-3;
+$red-4: $color-4;
+
+
+
+// Greys
+$black: #181818;
+$grey: #363636;
+$grey-1: lighten($grey, 10);
+$grey-2: lighten($grey, 20);
+$grey-3: lighten($grey, 37.5);
+$grey-4: lighten($grey, 50);
+$grey-5: lighten($grey, 70);
+
+
+//text-color
+$paragraph-color: $grey-1;
+
+
+// header color
+$header-color: $black;
+$h1-color: $header-color;
+$h2-color: $header-color;
+$h3-color: $header-color;
+$h4-color: $header-color;
+$h5-color: $header-color;
+$h6-color: $header-color;
+
+
+// blockquote color
+$blockquote-color: #2f2f2f;
+
+
+// Links
+$link-color: $red;
+
+
+// border
+$border-color: #dadada;
+$modifier-down: 0.8125;
+$modifier-up: 1.25;
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Grid ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+$gutter-vertical: 2rem;
+$gutter-horizontal: 1rem;
+
+
+
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Typography ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+// Webfont
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+//
+
+
+$header-font: Archivo Narrow, 'Archivo Narrow', sans-serif, Helvetica, Arial, sans-serif;
+$body-font: Archivo, 'Archivo', Helvetica, Arial, sans-serif;
+
+
+// Paragraph Styles
+$paragraph-size: 1rem;
+$smaller-font-size: 1rem * $modifier-down;
+$larger-font-size: 1rem * $modifier-up;
+$paragraph-line-height: 1.5;
+$paragraph-margin: 0.75rem;
+
+
+// Nav
+$nav-font-size: $smaller-font-size;
+
+
+// Header Styles
+$header-size: 3rem;
+$header-line-height: 1.25;
+$header-margin: 1.5rem;
+
+
+// Blockquote Styles
+$blockquote-size: 1.5rem;
+$blockquote-line-height: 1.5;
+$blockquote-margin: $paragraph-margin * 1.5;
+
+
+// Type Misc
+$font-weight: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 600;
+
+
+// Misc Other
+$border-radius: 10px;
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Header ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+
+// link color
+$nav-link-color: $grey-1;
+$nav-link-color-hover: $red;
+$header-background-color: white;
+
+
+// Menu
+$transition-timing: 0.25s;
+$menu-padding-top: 1rem;
+$menu-padding-side: 2rem;
+$desktop-menu-padding: 2.5rem;
+$mobile-menu-padding: 1.5rem;
+
+
+// hamburger Colors
+$hamburger-color: $color-1;
+$hamburger-height: $gutter-vertical;
+$hamburger-width: $gutter-vertical;
+$hamburger-line-height: 3px;
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Footer ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+// // background-color
+$footer-background-color: $red;
+
+
+
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Utilities ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+$named-colors: (
+		'red'		  $color-1   darken($color-3,15%),
+);
+
+@each $name, $normal in $named-colors {
+	p.#{$name},
+	h1.#{$name},
+	h2.#{$name},
+	h3.#{$name},
+	h4.#{$name},
+	h5.#{$name},
+	h6.#{$name},
+	li.#{$name},
+	a.#{$name},
+	.#{$name} p,
+	.#{$name} h1,
+	.#{$name} h2,
+	.#{$name} h3,
+	.#{$name} h4,
+	.#{$name} h5,
+	.#{$name} h6 {
+		color: #{$normal};
+	}
+
+	.has-background-color.#{$name} {
+		background-color: #{$normal};
+		* {
+			color: white;
+		}
+	}
+}
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Mixins ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+@mixin shadow {
+	box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+
+@mixin border($values...) {
+	@each $var in $values {
+		border-#{$var}: 1px solid $border-color;
+	}
+}
+
+
+@mixin transition {
+	transition: all 0.5s ease;
+}

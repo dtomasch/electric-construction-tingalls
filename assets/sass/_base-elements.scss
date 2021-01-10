@@ -1,0 +1,262 @@
+@use 'base-breakpoints' as *;
+@use 'site-variables' as *;
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Buttons ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+.nf-form-content button,
+.nf-form-content input[type='button'],
+.nf-form-content input[type='submit'],
+.button {
+	border: 0;
+	border-radius: $border-radius;
+	cursor: pointer;
+	// display: block;
+	font-size: $paragraph-size;
+	font-weight: $font-weight-medium;
+	padding: $paragraph-margin * 2;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	@include transition;
+	@include for-tablet-landscape-up {
+		font-size: $paragraph-size * $modifier-down;
+		padding: $paragraph-margin ($paragraph-margin*4);
+	}
+	&.full {
+		width: 100%;
+	}
+	&.large {
+		padding: $paragraph-margin ($paragraph-margin * 4);
+	}
+	&.small {
+		font-size: $paragraph-size;
+		padding: $paragraph-margin ($paragraph-margin * 3);
+	}
+}
+
+
+
+
+// TODO: this needs to move somwhere else
+.solid,
+.solid *,
+.solid-color,
+.solid-color * {
+	color: white;
+}
+
+a.solid:hover {
+	background-color: $grey-1 !important;
+	color: white;
+}
+
+// Button Colors
+@each $name, $normal, $dark in $named-colors {
+	.button.#{$name}:not(.solid) {
+		border: 1px solid #{$normal};
+		color: #{$normal};
+		&:hover {
+			border: 1px solid #{$dark};
+			color: #{$dark};
+		}
+	}
+
+
+
+	.button.solid.#{$name} {
+		background-color: #{$normal};
+		border: none;
+		color: white;
+		&:hover {
+			background-color: #{$dark};
+		}
+	}
+}
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Panels ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+.panel {
+	border-radius: $border-radius;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	@include border(top, right, bottom, left);
+
+	img {
+		border-radius: $border-radius $border-radius 0 0;
+		width: 100%;
+	}
+
+	.panel-text {
+		height: 100%;
+	}
+	.button {
+		// margin-top: auto;
+		margin: auto 2rem 2rem;
+	}
+}
+
+
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Text Image Rows ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+@include for-tablet-landscape-up {
+	.text-image-row {
+		align-items: center;
+	}
+}
+
+
+@include for-tablet-landscape-down {
+	.text-image-row {
+		div:nth-of-type(odd) {
+			order: 2;
+		}
+	}
+}
+
+.text-image-row:nth-of-type(even) {
+	div:nth-of-type(odd) {
+		order: 2;
+	}
+}
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Slider ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+// TODO: this can probably be cleaned up and moved into slick
+
+.section-slider {
+	// padding-bottom: $gutter-vertical * 2;
+}
+
+
+
+.slider {
+	.slide {
+		height: 100%;
+		@include for-tablet-landscape-up {
+			border-radius: $border-radius;
+			margin: 0 $gutter-horizontal;
+			min-height: 55vh;
+		}
+	}
+}
+
+.slick-track,
+.slick-list {
+	height: 100%;
+}
+
+
+.slick-dots {
+	bottom: -#{$gutter-vertical};
+}
+
+
+.quote-slider {
+	.slide-inner {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: 100%;
+		padding: 3rem 1rem;
+		position: relative;
+		@include for-tablet-landscape-up {
+			padding: 0 15%;
+		}
+
+		&:before {
+			// background-color: red;
+			background-image: url('../images/quotes-ko.svg');
+			background-repeat: no-repeat;
+			background-size: contain;
+			content: '';
+			display: block;
+			height: 4rem;
+			margin: 0 auto 1rem;
+			width: 4.5rem;
+			@include for-tablet-landscape-up {
+			}
+		}
+	}
+}
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Card ***
+// // TODO: Is this the right name here?
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+.card {
+	border-radius: $border-radius;
+}
+
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Logos ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+.grid img,
+.grid p {
+	margin: 1rem;
+}
+
+.columns {
+	box-sizing: border-box;
+
+	column-count: 3;
+	column-gap: 5%;
+	column-rule: 1px solid $grey-5;
+	p {
+		display: inline-block;
+		margin-bottom: 1.5rem;
+		width: 100%;
+	}
+}

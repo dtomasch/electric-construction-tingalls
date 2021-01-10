@@ -1,0 +1,486 @@
+@use 'site-variables' as *;
+@use 'base-breakpoints' as *;
+
+// —————————————————————————————————————————————————————————————————————————————
+// —————————————————————————————————————————————————————————————————————————————
+//
+//
+// *** Utility ***
+//
+//
+// —————————————————————————————————————————————————————————————————————————————
+// —————————————————————————————————————————————————————————————————————————————
+
+
+
+
+//--------------------------------------------------------------
+// Margin And Helper Classes
+//--------------------------------------------------------------
+
+
+$kind: //
+// $kprefix
+// $klocation
+		'm' 'margin',
+		'p' 'padding';
+//
+//
+$helpersuffix: //
+// $prefix
+// $location
+	't' 'top',
+	'r' 'right',
+	'b' 'bottom',
+	'l' 'left';
+
+// This looks complicated, but all the helper classes have the same basis, so we can write them all wtih loops. The first one is default, without a size prefix, then we do classes for each size
+@each $kprefix, $klocation in $kind {
+	@for $i from 0 through 5 {
+		.#{$kprefix}-#{$i} {
+			#{$klocation}: 1rem * $i;
+		}
+
+		@each $prefix, $location in $helpersuffix {
+			.#{$kprefix}#{$prefix}-#{$i} {
+				#{$klocation}-#{$location}: 1rem * $i;
+			}
+		}
+	}
+}
+
+@include for-tablet-landscape-down {
+	@each $kprefix, $klocation in $kind {
+		@for $i from 0 through 5 {
+			.#{$kprefix}-sm-#{$i} {
+				#{$klocation}: 1rem * $i;
+			}
+
+			@each $prefix, $location in $helpersuffix {
+				.#{$kprefix}#{$prefix}-sm-#{$i} {
+					#{$klocation}-#{$location}: 1rem * $i;
+				}
+			}
+		}
+	}
+}
+
+@include for-tablet-landscape-up {
+	@each $kprefix, $klocation in $kind {
+		@for $i from 0 through 5 {
+			.#{$kprefix}-md-#{$i} {
+				#{$klocation}: 1rem * $i;
+			}
+
+			@each $prefix, $location in $helpersuffix {
+				.#{$kprefix}#{$prefix}-md-#{$i} {
+					#{$klocation}-#{$location}: 1rem * $i;
+				}
+			}
+		}
+	}
+}
+
+@include for-desktop-up {
+	@each $kprefix, $klocation in $kind {
+		@for $i from 0 through 5 {
+			.#{$kprefix}-lg-#{$i} {
+				#{$klocation}: 1rem * $i;
+			}
+
+			@each $prefix, $location in $helpersuffix {
+				.#{$kprefix}#{$prefix}-lg-#{$i} {
+					#{$klocation}-#{$location}: 1rem * $i;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+//--------------------------------------------------------------
+// Flex Helper Classes
+// TODO: This can probably be sass-ified but this works for now
+//--------------------------------------------------------------
+[class*='flex-'] {
+	display: flex;
+}
+
+
+.flex-start {
+	justify-content: flex-start;
+}
+.flex-center {
+	justify-content: center;
+}
+
+.flex-end {
+	justify-content: flex-end;
+}
+
+.flex-around {
+	justify-content: space-around;
+}
+
+.flex-between {
+	justify-content: space-between;
+}
+
+.flex-top {
+	align-items: flex-start;
+}
+.flex-middle {
+	align-items: center;
+}
+.flex-bottom {
+	align-items: flex-end;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+.flex-column.flex-bottom {
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-end;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+@include for-tablet-landscape-down {
+	[class*='flex-'] {
+		flex-wrap: wrap;
+	}
+
+	.flex-start-sm {
+		justify-content: flex-start;
+	}
+	.flex-center-sm {
+		justify-content: center;
+	}
+
+	.flex-end-sm {
+		justify-content: flex-end;
+	}
+
+	.flex-around-sm {
+		justify-content: space-around;
+	}
+
+	.flex-between-sm {
+		justify-content: space-between;
+	}
+
+	.flex-top-sm {
+		align-items: flex-start;
+	}
+	.flex-middle-sm {
+		align-items: center;
+	}
+	.flex-bottom-sm {
+		align-items: flex-end;
+	}
+	.flex-column-sm {
+		flex-direction: column;
+	}
+	.flex-column-sm.flex-bottom-sm {
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+}
+@include for-tablet-landscape-up {
+	.flex-start-md {
+		justify-content: flex-start;
+	}
+	.flex-center-md {
+		justify-content: center;
+	}
+
+	.flex-end-md {
+		justify-content: flex-end;
+	}
+
+	.flex-around-md {
+		justify-content: space-around;
+	}
+
+	.flex-between-md {
+		justify-content: space-between;
+	}
+
+	.flex-top-md {
+		align-items: flex-start;
+	}
+	.flex-middle-md {
+		align-items: center;
+	}
+	.flex-bottom-md {
+		align-items: flex-end;
+	}
+	.flex-column-md {
+		flex-direction: column;
+	}
+	.flex-column-md.flex-bottom-md {
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+}
+@include for-desktop-up {
+	.flex-start-lg {
+		justify-content: flex-start;
+	}
+	.flex-center-lg {
+		justify-content: center;
+	}
+
+	.flex-end-lg {
+		justify-content: flex-end;
+	}
+
+	.flex-around-lg {
+		justify-content: space-around;
+	}
+
+	.flex-between-lg {
+		justify-content: space-between;
+	}
+
+	.flex-top-lg {
+		align-items: flex-start;
+	}
+	.flex-middle-lg {
+		align-items: center;
+	}
+	.flex-bottom-lg {
+		align-items: flex-end;
+	}
+	.flex-column-lg {
+		flex-direction: column;
+	}
+	.flex-column-lg.flex-bottom-lg {
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+}
+
+.text-uppercase {
+	text-transform: uppercase;
+}
+
+//--------------------------------------------------------------
+// Text align helper classes
+//--------------------------------------------------------------
+
+$textpositions: //
+'center',
+'left',
+'right';
+
+@each $position in $textpositions {
+	.text-#{$position} {
+		text-align: #{$position};
+	}
+}
+
+@include for-tablet-landscape-down {
+	@each $position in $textpositions {
+		.text-#{$position}-sm {
+			text-align: #{$position};
+		}
+	}
+}
+@include for-tablet-landscape-up {
+	@each $position in $textpositions {
+		.text-#{$position}-md {
+			text-align: #{$position};
+		}
+	}
+}
+@include for-desktop-up {
+	@each $position in $textpositions {
+		.text-#{$position}-lg {
+			text-align: #{$position};
+		}
+	}
+}
+
+
+.float-right {
+	float: right;
+}
+.float-left {
+	float: left;
+}
+
+
+
+//--------------------------------------------------------------
+// HR Classes
+//--------------------------------------------------------------
+
+// TODO: Might want to change this to &:after so that we can add margin indents
+$hrs: //
+	'top',
+	'right',
+	'bottom',
+	'left';
+
+
+// @each $location in $hrs {
+// 	.hr-#{$location} {
+// 		@include border(#{$location});
+// 	}
+// }
+.hr-all {
+	@include border(top, right, bottom, left);
+}
+
+div.hr-all,
+section.hr-all {
+	padding: $gutter-vertical;
+}
+.hr-all .row:only-of-type,
+.hr-all .row:last-of-type, {
+	margin-bottom: 0;
+}
+
+
+section.width-slim.hr-all {
+	@include width-slim;
+}
+
+section.width-wide.hr-all {
+	@include width-wide;
+}
+section.width-full.hr-all {
+	width: $width-full;
+}
+
+
+.hr-bottom::after,
+.hr-top::before {
+	content: '';
+	display: block;
+	height: 1px;
+	margin: auto;
+	position: relative;
+}
+
+.hr-bottom::after {
+	bottom: 0;
+	@include border(bottom);
+}
+
+.hr-top::before {
+	padding-top: $gutter-vertical;
+	top: 0;
+	@include border(top);
+}
+
+.row.hr-bottom {
+	margin-bottom: $gutter-vertical * 1.25;
+}
+
+// TODO: these HRs need to be cleaned up
+[class*='col-'].hr-bottom {
+	margin-bottom: $gutter-vertical * 2;
+	&:after {
+		bottom: -#{$gutter-vertical};
+	}
+}
+
+
+.hr-bottom:last-of-type:not(:only-of-type)::after {
+	display: none;
+}
+
+@include for-tablet-landscape-down {
+	[class*='hr-']::after,
+	[class*='hr-']::before {
+		// max-width: $width-full;
+	}
+}
+
+
+// TODO: somehow move away from the footer end line to the section last of type end line
+@include for-tablet-landscape-up {
+	.width-slim section.hr-top::before,
+	.width-slim section.hr-bottom::after,
+	section.width-slim.hr-top::before,
+	section.width-slim.hr-bottom::after {
+		max-width: $width-slim-max;
+		width: $width-slim - $gutter-vertical;
+	}
+	.width-wide section.hr-top::before,
+	.width-wide section.hr-bottom::after,
+	section.width-wide.hr-top::before,
+	section.width-wide.hr-bottom::after {
+		max-width: $width-wide-max;
+		width: $width-wide - $gutter-vertical;
+	}
+
+	.width-full section.hr-top::before,
+	.width-full section.hr-bottom::after,
+	section.width-full.hr-top::before,
+	section.width-full.hr-bottom::after {
+		@include width-full;
+	}
+}
+
+
+.row.hr-top::before,
+.row.hr-bottom::after {
+	width: calc(100% - 2rem);
+}
+
+//--------------------------------------------------------------
+// Hide Classes
+//--------------------------------------------------------------
+
+// TODO: Needs some extra logic on this
+.is-hidden {
+	display: none;
+	visibility: hidden;
+}
+
+@include for-tablet-landscape-down {
+	.is-hidden-sm {
+		display: none;
+		visibility: hidden;
+	}
+}
+@include for-tablet-landscape-up {
+	.is-hidden-md {
+		display: none;
+		visibility: hidden;
+	}
+}
+@include for-desktop-up {
+	.is-hidden-lg {
+		display: none;
+		visibility: hidden;
+	}
+}
+
+
+//--------------------------------------------------------------
+// Keep footer at bottom
+//--------------------------------------------------------------
+html,
+body {
+	height: 100%;
+}
+body {
+	display: flex;
+	flex-direction: column;
+}
+main#site-content {
+	flex: 1 0 auto;
+}
+.footer {
+	flex-shrink: 0;
+}

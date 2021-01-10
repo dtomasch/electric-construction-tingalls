@@ -1,0 +1,14 @@
+.acfe-modal-content .acf-color-picker .wp-picker-holder {
+	position: absolute;
+}
+.acf-field-5f3ef2d3154b4 .acf-label {
+	display: none;
+}
+
+.acf-field.acf-hide-label {
+	padding: 0 12px 20px;
+	> .acf-label {
+		display: none;
+		visibility: hidden;
+	}
+}

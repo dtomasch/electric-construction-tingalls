@@ -1,0 +1,42 @@
+@use 'site-variables' as *;
+
+
+input,
+optgroup,
+select,
+textarea {
+	border: 1px solid $border-color;
+	border-radius: $border-radius;
+}
+
+input,
+textarea {
+	margin-bottom: 2rem;
+	min-height: 3rem;
+}
+
+input[type='text'],
+textarea {
+	color: $grey-3;
+	padding: 1rem;
+	width: 100%;
+}
+
+.nf-form-content {
+	padding: 0 !important;
+}
+
+.nf-form-fields-required {
+	margin-bottom: 2rem;
+}
+
+
+.nf-form-content button,
+.nf-form-content input[type='button'],
+.nf-form-content input[type='submit'],
+input[type='submit'] {
+	background-color: $red;
+	color: white;
+	float: right;
+	min-width: 20%;
+}

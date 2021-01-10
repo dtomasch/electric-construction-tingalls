@@ -1,0 +1,878 @@
+@use 'site-variables' as *;
+@use 'base-breakpoints' as *;
+
+
+
+// TODO: This can get cleaned up
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Nav General Items ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+#page-header {
+	z-index: 99999;
+}
+
+
+nav {
+	font-family: $header-font;
+	text-transform: uppercase;
+	a {
+		display: block;
+		text-decoration: none;
+	}
+}
+
+
+
+
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Mega Menu ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+
+
+.megamenu-container {
+	left: 0;
+	margin: 0 auto;
+	position: fixed;
+	right: 0;
+}
+
+.megamenu {
+	background-color: $header-background-color;
+	@include transition;
+}
+
+
+.megamenu > ul {
+	box-sizing: border-box;
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 $gutter-vertical;
+}
+
+
+
+.megamenu > ul li,
+.megamenu > ul li a {
+	cursor: pointer;
+}
+
+
+// all links in menu
+.megamenu > ul li a {
+	color: $nav-link-color;
+}
+
+
+.megamenu > ul > li a {
+	// This is the padding on the actual navigation item
+	padding: $paragraph-margin $gutter-vertical;
+}
+
+
+.megamenu > ul > li > ul {
+	// This is the sub menu
+	background-color: $header-background-color;
+	display: flex;
+	justify-content: center;
+	left: 0;
+	opacity: 0;
+	padding: $paragraph-margin;
+	position: absolute;
+	transition: opacity $transition-timing linear, visibility ($transition-timing * $modifier-down) linear;
+	visibility: hidden;
+	width: 100%;
+	z-index: 99;
+	@include shadow;
+	// @include border(top);
+}
+
+.megamenu > ul > li > ul > li {
+	// flex: 1;
+	max-width: 25%;
+	text-align: center;
+	a:hover {
+		color: $link-color;
+		text-decoration: underline;
+	}
+}
+
+.megamenu > ul > li > ul > li.menu-item-has-children {
+	padding: 0 2rem;
+	> a {
+		border-bottom: 1px solid $border-color;
+	}
+}
+
+
+.megamenu > ul > li.logo {
+	background-repeat: no-repeat;
+	flex: 1;
+	// z-index: 9999;
+	&:hover {
+		background-color: transparent;
+	}
+}
+
+.megamenu > ul > li.logo a {
+	color: transparent;
+	height: 100%;
+	padding: 0;
+}
+
+@include for-tablet-landscape-up {
+	.megamenu-mobile {
+		display: none;
+	}
+
+	.megamenu > ul > li > ul {
+		&:before,
+		&:after {
+			// background-color: rgba(#ffff00, 0.36);
+			content: '';
+			display: block;
+			left: 0;
+			position: absolute;
+			right: 0;
+			width: 100%;
+		}
+		&:before {
+			height: $paragraph-margin;
+			top: -#{$paragraph-margin};
+		}
+
+		&:after {
+			bottom: -#{$paragraph-margin * 2};
+			height: $paragraph-margin * 2;
+		}
+	}
+
+
+	.megamenu > ul > li:not(.logo):hover {
+		background-color: $nav-link-color-hover;
+		> a {
+			color: $header-background-color;
+			position: relative;
+			z-index: 9999;
+		}
+	}
+
+	// On larger screens, we show the submenu on hover
+	.megamenu > ul > li:not(.logo):hover ul {
+		opacity: 1;
+		transition: opacity $transition-timing linear, visibility ($transition-timing * $modifier-down) linear;
+		visibility: visible;
+	}
+}
+
+
+
+
+
+
+
+
+
+// .megamenu > ul > li > ul.normal-sub {
+// 	left: auto;
+// 	max-width: 170px;
+// 	padding: 5px 10px;
+// 	width: 100%;
+// }
+// .megamenu > ul > li > ul.normal-sub > li {
+// 	width: 100%;
+// }
+// .megamenu > ul > li > ul.normal-sub > li a {
+// 	border: 0;
+// 	padding: 0.5em 0;
+// }
+// .containersearch {
+// 	background: #e84118;
+// 	padding: 0 30px;
+// 	position: absolute;
+// 	right: 0;
+// 	text-align: center;
+// 	top: 0;
+// 	transition: all 0.5s ease;
+// 	width: 0;
+// }
+// .containersearch .fa {
+// 	background: #e84118;
+// 	color: #ffffff;
+// 	cursor: pointer;
+// 	font-size: 19px;
+// 	padding: 0;
+// 	position: absolute;
+// 	right: 20px;
+// 	top: 15px;
+// }
+// .inputnui {
+// 	background: transparent;
+// 	border: 0;
+// 	color: #ffffff;
+// 	font-size: 15px;
+// 	outline: none;
+// 	padding: 15px 0;
+// 	transition: all 0.3s ease;
+// 	width: 0;
+// }
+// .containersearch.active {
+// 	padding-left: 25px;
+// 	transition: all 0.5s ease;
+// 	width: 250px;
+// }
+// .inputnui.active {
+// 	padding-left: 5px;
+// 	transition: all 0.5s 0.8s ease;
+// 	width: 98%;
+// }
+// input::placeholder {
+// 	color: #ffffff;
+// }
+
+
+// Mobile styles
+
+
+// .megamenu-mobile:before {
+// // color: #222222;
+// content: '\f0c9';
+// font-family: 'fontawesome';
+// font-size: 1.5rem;
+// left: 20px;
+// padding: 0;
+// position: absolute;
+// top: 19px;
+// transform: translateY(-25%);
+// }
+
+// .megamenu-dropdown-icon:before {
+// color: #ffffff;
+// content: '\f107';
+// cursor: pointer;
+// display: none;
+// font-family: 'fontawesome';
+// position: absolute;
+// right: 20px;
+// top: 15px;
+// }
+
+// html.noscroll,
+// html.noscroll body {
+// 	height: 100% !important;
+// 	overflow: hidden !important;
+// 	overflow-y: hidden;
+// }
+//
+// html.noscroll-long {
+// 	overflow-y: scroll !important;
+// }
+
+
+
+
+//--------------------------------------------------------------
+// Start header on regular pages
+//--------------------------------------------------------------
+@include for-tablet-landscape-up {
+	.start-header {
+		.megamenu > ul > li:not(.logo) {
+			margin: ($gutter-vertical * 2) 0 0;
+		}
+
+		.megamenu > ul > li.logo {
+			background-position-y: 2rem;
+			background-size: auto 65%;
+		}
+	}
+}
+
+// TODO: This needs to be refactored as it's a bit of a kludge
+//--------------------------------------------------------------
+// Start header in a featured image page
+//--------------------------------------------------------------
+
+.has-featured-image .start-header {
+	.megamenu {
+		background-color: transparent;
+	}
+	.megamenu:hover {
+		// background-color: white;
+		// transition: all 0.25s ease;
+	}
+
+	.megamenu > ul > li:not(.logo) a {
+		color: white;
+	}
+
+	.megamenu > ul > li:not(.logo):hover {
+		// background-color: black;
+	}
+
+	.megamenu > ul > li:not(.logo):hover > a {
+		// color: white;
+	}
+
+
+	.megamenu > ul > li:hover > ul {
+		// background-color: white;
+	}
+	.megamenu > ul > li > ul {
+		background-color: transparent;
+		box-shadow: none;
+	}
+}
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------
+// Scroll Header
+//--------------------------------------------------------------
+
+
+.scroll-header {
+	.megamenu > ul {
+		@include shadow;
+	}
+	.megamenu > ul > li:not(.logo) {
+		// margin: 0;
+		transition: all 1s ease;
+	}
+
+	.megamenu > ul > li.logo {
+		background-position-y: center;
+		background-size: auto 75%;
+		// transition: all 0.85s ease;
+	}
+	.megamenu > ul > li > ul {
+		// margin-top: 0;/
+	}
+}
+
+
+
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Mobile Styles ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+@include for-tablet-landscape-down {
+	.megamenu-mobile {
+		background-position: $gutter-vertical center;
+		background-repeat: no-repeat;
+		background-size: auto 60%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		padding: $gutter-vertical;
+		transition: none;
+		@include shadow;
+
+		align-content: center;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+	}
+
+
+	.has-featured-image {
+		.megamenu {
+			background-color: transparent;
+			transition: 200ms;
+		}
+
+		.start-header .megamenu > ul > li:not(.logo) a {
+			color: black;
+		}
+
+		.megamenu.show-on-mobile {
+			background-color: white;
+		}
+
+		.scroll-header .megamenu {
+			background-color: white;
+		}
+	}
+
+	//--------------------------------------------------------------
+	// Featured Image Start Header
+	//--------------------------------------------------------------
+	.has-featured-image .start-header {
+		.megamenu-mobile {
+			box-shadow: none;
+		}
+	}
+
+	.has-featured-image .scroll-header {
+		.megamenu-mobile {
+			@include shadow;
+		}
+	}
+
+
+	.show-on-mobile.megamenu .megamenu-mobile {
+		box-shadow: none;
+	}
+
+
+
+	.megamenu.show-on-mobile li.active {
+		background-color: $grey-4;
+	}
+
+
+	.megamenu > ul > li.logo {
+		display: none;
+	}
+
+	.megamenu > ul {
+		display: none;
+		// height: 100vh;
+		// height: -webkit-fill-available;
+		padding: 0;
+	}
+
+	.megamenu > ul > li {
+		border-bottom: 1px solid $border-color;
+		position: relative;
+	}
+
+	.megamenu > ul > li.menu-item-has-children:after {
+		// background-image: url('../images/slide-arrow-right-hover.svg');
+		border: solid black;
+		border-width: 0 3px 3px 0;
+		content: '';
+		display: inline-block;
+		padding: 3px;
+		position: absolute;
+		right: $mobile-menu-padding;
+		top: $mobile-menu-padding * 1.25;
+		-webkit-transform: rotate(45deg);
+		        transform: rotate(45deg);
+	}
+
+	.megamenu > ul  li {
+		text-align: left;
+		width: 100%;
+	}
+
+
+
+	.megamenu > ul li a {
+		padding: $gutter-vertical;
+	}
+
+	.megamenu > ul  li.menu-item-has-children > a {
+		max-width: 75%;
+	}
+
+
+	.megamenu > ul > li > ul {
+		background-color: $grey-5;
+		box-shadow: none;
+		display: none;
+		// max-height: 200px;
+		opacity: 1;
+		overflow-y: scroll;
+		padding: 0;
+		position: relative;
+		visibility: visible;
+	}
+	.megamenu > ul > li > ul.active {
+		transition: max-height 1s ease, padding 0s;
+	}
+
+
+
+	.megamenu > ul > li > ul > li {
+		max-width: 100%;
+		text-align: left;
+	}
+
+	//--------------------------------------------------------------
+	// search
+	//--------------------------------------------------------------
+	.containersearch {
+		background: transparent;
+	}
+	.containersearch .fa {
+		background: transparent;
+		color: #222222;
+	}
+	.inputnui.active,
+	input::placeholder {
+		color: #888888;
+	}
+
+
+	//--------------------------------------------------------------
+	//--------------------------------------------------------------
+	//
+	//
+	// *** Hamburger ***
+	//
+	//
+	//--------------------------------------------------------------
+	//--------------------------------------------------------------
+
+
+
+	.hamburger {
+		/* FOR DISPLAYING EVERY ELEMENT IN THE CENTER : */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: $hamburger-width;
+		width: $hamburger-width;
+
+		/* CREATING THE MIDDLE LINE OF THE HAMBURGER : */
+
+		> div {
+			background-color: black;
+			height: $hamburger-line-height;
+			left: 0;
+			position: relative;
+			top: 0;
+			transition: all 0.25s;
+			width: 100%;
+		}
+
+		/* CREATING THE TOP AND BOTTOM LINES :
+		TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
+
+		> div::before,
+		> div::after {
+			background-color: black;
+			content: '';
+			height: $hamburger-line-height;
+			position: absolute;
+			top: -10px;
+			transition: all 0.25s ease;
+			width: 100%;
+		}
+
+		> div::after {
+			top: 10px;
+		}
+	}
+
+
+	.has-featured-image .start-header {
+		.hamburger {
+			// background-color: white;
+			> div {
+				background-color: white;
+			}
+
+			> div::before,
+			> div::after {
+				background-color: white;
+			}
+		}
+	}
+
+	.has-featured-image .start-header {
+		.megamenu.show-on-mobile .hamburger {
+			> div::before,
+			> div::after {
+				background-color: black;
+			}
+		}
+	}
+
+
+	/* IF THE TOGGLER IS IN ITS CHECKED STATE, THEN SETTING THE BACKGROUND OF THE MIDDLE LAYER TO COMPLETE BLACK AND OPAQUE :  */
+
+	.hamburger.active > div {
+		background-color: rgba(0,0,0,0);
+	}
+
+	.hamburger.active > div::before {
+		background: black;
+		top: 0;
+		transform: rotate(45deg);
+		transition: all 0.25s;
+	}
+
+	/* AND ROTATING THE TOP AND BOTTOM LINES :  */
+
+	.hamburger.active > div::after {
+		background: black;
+		top: 0;
+		transform: rotate(135deg);
+		transition: all 0.25s;
+	}
+}
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** breadcrumbs ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+.breadcrumbs {
+	color: $nav-link-color;
+	font-size: $smaller-font-size;
+	margin: 0;
+	// padding: $gutter-vertical / 2) $desktop-menu-padding $desktop-menu-padding;
+	padding: ($gutter-vertical / 2) $gutter-vertical ($gutter-vertical*1.5);
+
+
+	a {
+		color: $nav-link-color;
+		font-size: $smaller-font-size;
+		text-decoration: none;
+	}
+	a:hover {
+		color: $link-color;
+		text-decoration: underline;
+	}
+}
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** In Page Nav ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+.in-page-nav {
+	color: $nav-link-color;
+	margin: $gutter-vertical / 2;
+	ul.flat {
+		justify-content: center;
+		li {
+			padding: 0 $gutter-vertical;
+			@include border(right);
+			&:last-of-type {
+				border: none;
+				padding-right: 0;
+			}
+		}
+	}
+	a {
+		color: $nav-link-color;
+		text-decoration: none;
+	}
+}
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Pagination ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+nav.pagination {
+	margin: 2rem 0 0;
+	padding: 2rem 0 0;
+	@include border(top);
+	.nav-links {
+		display: flex;
+		justify-content: center;
+		* {
+			padding: 0 1rem;
+		}
+	}
+}
+
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** About Menu ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+#menu-about-menu li {
+	@include for-tablet-landscape-down {
+		flex: 1 0 50%;
+		padding: 1rem 0;
+	}
+}
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//
+// *** Footer ***
+//
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+footer {
+	background-color: $footer-background-color;
+}
+
+// TODO: This needs to be combined with the other color options
+footer a:hover {
+	color: white;
+	text-decoration: underline;
+}
+
+footer .logo {
+	// max-width: 12rem;
+}
+
+body:not(.paged) {
+	footer {
+		margin-top: 10rem;
+		&:before {
+			content: '';
+			display: block;
+			height: 1px;
+			margin: auto;
+			position: relative;
+			top: -50px;
+			@include border(top);
+		}
+	}
+}
+
+// TODO: could this be combined with the other?
+
+
+footer::before {
+	max-width: $width-full;
+}
+
+@include for-tablet-landscape-up {
+	body:not(.paged) {
+		.container.width-slim + footer {
+			&:before {
+				width: $width-slim - $gutter-vertical;
+			}
+		}
+		.container.width-wide + footer {
+			&:before {
+				width: $width-wide - $gutter-vertical;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+footer #copyright {
+	background-color: darken($footer-background-color, 15%);
+	font-size: $nav-font-size;
+}
+
+footer #footer-inner {
+	// padding: 0 $gutter-horizontal;
+	@include width-full;
+}
+
+footer {
+	p,
+	a {
+		color: white;
+	}
+}
+
+footer nav ul {
+	display: flex;
+	flex-direction: row;
+	@include for-tablet-landscape-down {
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+	@include for-tablet-landscape-up {
+		justify-content: space-between;
+	}
+	@include for-desktop-up {
+		justify-content: flex-end;
+	}
+}
+
+footer nav ul > li > ul {
+	flex-direction: column;
+}
+
+footer nav > ul > li {
+	@include for-tablet-landscape-down {
+		flex: 1 0 50%;
+		padding-bottom: 2rem;
+	}
+	@include for-desktop-up {
+		padding-right: 3rem;
+	}
+
+	&:last-of-type {
+		padding-right: 0;
+	}
+}
+
+footer nav  ul  li a {
+	padding-bottom: 0.5rem;
+}
+footer nav > ul > li > a {
+	font-weight: bold;
+}
+
+footer nav > ul > li > ul > li a {
+	text-transform: none;
+}
+
+footer li.header-only {
+	display: none;
+	visibility: hidden;
+}
+
+
+footer img.social-icon {
+	margin-top: 25px;
+	max-width: 100px;
+}
